@@ -272,9 +272,13 @@ bookDiv.innerHTML = `
 
         const img = bookDiv.querySelector("img");
 
+const img = bookDiv.querySelector("img");
+
 img.onerror = () => {
+  img.onerror = null; // ✅ prevents infinite loop
   img.src = "placeholder-cover.png";
 };
+
 
 
         const toggle = bookDiv.querySelector(".read-toggle");
