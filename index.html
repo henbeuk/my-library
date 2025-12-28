@@ -4,43 +4,53 @@
   <meta charset="UTF-8">
   <title>My Library</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
 
-    #bookshelf {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+  .author-section {
+    margin-bottom: 40px;
+  }
 
-.book {
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
-}
+  .author-name {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+  }
 
-    .book img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      margin-bottom: 10px;
-      background: #eee;
-    }
+  .bookshelf {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 
-    .book .title {
-      font-weight: bold;
-    }
+  .book {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 220px;
+  }
 
-    .book .meta {
-      font-size: 0.9em;
-      color: #555;
-    }
-  </style>
+  .book img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    background: #eee;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+  .meta {
+    font-size: 0.9em;
+    color: #555;
+  }
+</style>
+
 </head>
 
 <body>
