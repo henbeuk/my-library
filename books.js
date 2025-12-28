@@ -73,20 +73,40 @@ async function fetchOpenLibraryData(book) {
 
 
 // Render
-Object.keys(library).forEach(async author => {
+const authors = Object.keys(library).sort();
+
+authors.forEach(async author => {
   const authorSection = document.createElement("div");
   authorSection.className = "author-section";
 
+  const totalBooks = Object.values(library[author])
+    .reduce((sum, series) => sum + series.length, 0);
+
   const authorHeader = document.createElement("div");
-  authorHeader.className = "author-name";
-  authorHeader.textContent = author;
+  authorHeader.className = "author-name author-header";
+  authorHeader.innerHTML = `
+    <span>${author}</span>
+    <span class="author-toggle">(${totalBooks}) ▸</span>
+  `;
+
+  const booksContainer = document.createElement("div");
+  booksContainer.className = "author-books";
+
+  authorHeader.addEventListener("click", () => {
+    const isOpen = booksContainer.style.display === "block";
+    booksContainer.style.display = isOpen ? "none" : "block";
+    authorHeader.querySelector(".author-toggle").textContent =
+      `(${totalBooks}) ${isOpen ? "▸" : "▾"}`;
+  });
 
   authorSection.appendChild(authorHeader);
+  authorSection.appendChild(booksContainer);
   root.appendChild(authorSection);
 
   const seriesMap = library[author];
 
   for (const series of Object.keys(seriesMap)) {
+
     const seriesHeader = document.createElement("div");
     seriesHeader.className = "series-name";
     seriesHeader.textContent = series;
