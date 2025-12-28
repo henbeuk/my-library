@@ -12,7 +12,7 @@ const books = [
     bookNumber: 2
   },
     {
-    title: "To Green Angel Tower Siege",
+    title: "To Green Angel Tower: Siege",
     author: "Tad Williams",
     series: "Memory, Sorrow and Thorn",
     bookNumber: 3
