@@ -3,9 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>My Library</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #bookshelf {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .book {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 220px;
+    }
+
+    .book img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .book .title {
+      font-weight: bold;
+    }
+
+    .book .meta {
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
 </head>
+
 <body>
   <h1>My Library</h1>
-  <p>If you can read this, the site works.</p>
+
+  <div id="bookshelf"></div>
+
+  <!-- This loads your book data and rendering logic -->
+  <script src="books.js"></script>
 </body>
 </html>
