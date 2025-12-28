@@ -119,6 +119,24 @@ bookDiv.innerHTML = `
   </div>
 `;
 
+      const toggle = bookDiv.querySelector(".read-toggle");
+
+toggle.addEventListener("click", () => {
+  const current = localStorage.getItem(bookId);
+
+  if (current === "read") {
+    localStorage.setItem(bookId, "unread");
+    toggle.textContent = "○ Unread";
+    toggle.classList.remove("read");
+    toggle.classList.add("unread");
+  } else {
+    localStorage.setItem(bookId, "read");
+    toggle.textContent = "✔ Read";
+    toggle.classList.remove("unread");
+    toggle.classList.add("read");
+  }
+});
+
     }
   }
 });
