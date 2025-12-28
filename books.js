@@ -1,29 +1,141 @@
 const books = [
-  {
-    title: "The Dragonbone Chair",
-    author: "Tad Williams",
-    series: "Memory, Sorrow and Thorn",
-    bookNumber: 1
-  },
-    {
-    title: "Stone of Farewell",
-    author: "Tad Williams",
-    series: "Memory, Sorrow and Thorn",
-    bookNumber: 2
-  },
-    {
-    title: "To Green Angel Tower: Siege",
-    author: "Tad Williams",
-    series: "Memory, Sorrow and Thorn",
-    bookNumber: 3
-  },
-  {
-    title: "Wizard’s First Rule",
-    author: "Terry Goodkind",
-    series: "Sword of Truth",
-    bookNumber: 1
-  }
+  // =========================
+  // Tad Williams – Memory, Sorrow and Thorn
+  // =========================
+  { title: "The Dragonbone Chair", author: "Tad Williams", series: "Memory, Sorrow and Thorn", bookNumber: 1 },
+  { title: "Stone of Farewell", author: "Tad Williams", series: "Memory, Sorrow and Thorn", bookNumber: 2 },
+  { title: "To Green Angel Tower: Siege", author: "Tad Williams", series: "Memory, Sorrow and Thorn", bookNumber: 3 },
+  { title: "To Green Angel Tower: Storm", author: "Tad Williams", series: "Memory, Sorrow and Thorn", bookNumber: 4 },
+
+  // =========================
+  // Tad Williams – Shadowmarch
+  // =========================
+  { title: "Shadowmarch", author: "Tad Williams", series: "Shadowmarch", bookNumber: 1 },
+
+  // =========================
+  // Peter V. Brett – Demon Cycle
+  // =========================
+  { title: "The Warded Man", author: "Peter V. Brett", series: "The Demon Cycle", bookNumber: 1 },
+  { title: "The Desert Spear", author: "Peter V. Brett", series: "The Demon Cycle", bookNumber: 2 },
+  { title: "The Daylight War", author: "Peter V. Brett", series: "The Demon Cycle", bookNumber: 3 },
+
+  // =========================
+  // J. R. R. Tolkien – Middle-earth
+  // =========================
+  { title: "The Hobbit", author: "J. R. R. Tolkien", series: "Middle-earth", bookNumber: 1 },
+  { title: "The Lord of the Rings", author: "J. R. R. Tolkien", series: "Middle-earth", bookNumber: 2 },
+
+  // =========================
+  // Roger Taylor
+  // =========================
+  { title: "Whistler", author: "Roger Taylor", series: null, bookNumber: null },
+  { title: "Ibryen", author: "Roger Taylor", series: null, bookNumber: null },
+
+  // =========================
+  // Raymond E. Feist – Riftwar Cycle
+  // =========================
+  { title: "Magician", author: "Raymond E. Feist", series: "Riftwar Cycle", bookNumber: 1 },
+  { title: "Silverthorn", author: "Raymond E. Feist", series: "Riftwar Cycle", bookNumber: 2 },
+  { title: "A Darkness at Sethanon", author: "Raymond E. Feist", series: "Riftwar Cycle", bookNumber: 3 },
+
+  // Riftwar related
+  { title: "Prince of the Blood", author: "Raymond E. Feist", series: "Riftwar Cycle", bookNumber: null },
+  { title: "The King's Buccaneer", author: "Raymond E. Feist", series: "Riftwar Cycle", bookNumber: null },
+
+  // Riftwar Legends
+  { title: "Murder in LaMut", author: "Raymond E. Feist & Joel Rosenberg", series: "Legends of the Riftwar", bookNumber: 1 },
+
+  // Empire Trilogy
+  { title: "Servant of the Empire", author: "Raymond E. Feist & Janny Wurts", series: "Empire Trilogy", bookNumber: 2 },
+
+  // =========================
+  // Brandon Sanderson – Mistborn
+  // =========================
+  { title: "The Final Empire", author: "Brandon Sanderson", series: "Mistborn", bookNumber: 1 },
+  { title: "The Well of Ascension", author: "Brandon Sanderson", series: "Mistborn", bookNumber: 2 },
+  { title: "The Hero of Ages", author: "Brandon Sanderson", series: "Mistborn", bookNumber: 3 },
+
+  // =========================
+  // Stephen Donaldson – Thomas Covenant
+  // =========================
+  { title: "Lord Foul's Bane", author: "Stephen Donaldson", series: "Thomas Covenant", bookNumber: 1 },
+  { title: "The Illearth War", author: "Stephen Donaldson", series: "Thomas Covenant", bookNumber: 2 },
+  { title: "The Power That Preserves", author: "Stephen Donaldson", series: "Thomas Covenant", bookNumber: 3 },
+  { title: "The Wounded Land", author: "Stephen Donaldson", series: "Thomas Covenant", bookNumber: 4 },
+  { title: "The One Tree", author: "Stephen Donaldson", series: "Thomas Covenant", bookNumber: 5 },
+
+  // =========================
+  // David Eddings – Belgariad
+  // =========================
+  { title: "Pawn of Prophecy", author: "David Eddings", series: "The Belgariad", bookNumber: 1 },
+  { title: "Queen of Sorcery", author: "David Eddings", series: "The Belgariad", bookNumber: 2 },
+  { title: "Magician's Gambit", author: "David Eddings", series: "The Belgariad", bookNumber: 3 },
+  { title: "Castle of Wizardry", author: "David Eddings", series: "The Belgariad", bookNumber: 4 },
+
+  // =========================
+  // Terry Brooks – Shannara
+  // =========================
+  { title: "The Sword of Shannara", author: "Terry Brooks", series: "Shannara", bookNumber: 1 },
+  { title: "The Elfstones of Shannara", author: "Terry Brooks", series: "Shannara", bookNumber: 2 },
+  { title: "The Wishsong of Shannara", author: "Terry Brooks", series: "Shannara", bookNumber: 3 },
+  { title: "The Scions of Shannara", author: "Terry Brooks", series: "Shannara", bookNumber: 4 },
+  { title: "The Druid of Shannara", author: "Terry Brooks", series: "Shannara", bookNumber: 5 },
+  { title: "The Elf Queen of Shannara", author: "Terry Brooks", series: "Shannara", bookNumber: 6 },
+  { title: "The Talismans of Shannara", author: "Terry Brooks", series: "Shannara", bookNumber: 7 },
+  { title: "The Darkling Child", author: "Terry Brooks", series: "Shannara", bookNumber: 8 },
+  { title: "The High Druid's Blade", author: "Terry Brooks", series: "Shannara", bookNumber: 9 },
+
+  // =========================
+  // Terry Goodkind – Sword of Truth
+  // =========================
+  { title: "Wizard's First Rule", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 1 },
+  { title: "Stone of Tears", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 2 },
+  { title: "Blood of the Fold", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 3 },
+  { title: "Temple of the Winds", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 4 },
+  { title: "Soul of the Fire", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 5 },
+  { title: "Faith of the Fallen", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 6 },
+  { title: "The Pillars of Creation", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 7 },
+  { title: "Naked Empire", author: "Terry Goodkind", series: "Sword of Truth", bookNumber: 8 },
+
+  // =========================
+  // Trudi Canavan
+  // =========================
+  { title: "The Priestess of the White", author: "Trudi Canavan", series: "Age of the Five", bookNumber: 1 },
+  { title: "Last of the Wilds", author: "Trudi Canavan", series: "Age of the Five", bookNumber: 2 },
+  { title: "Voice of the Gods", author: "Trudi Canavan", series: "Age of the Five", bookNumber: 3 },
+  { title: "The Magicians' Guild", author: "Trudi Canavan", series: "Black Magician Trilogy", bookNumber: 1 },
+  { title: "The Novice", author: "Trudi Canavan", series: "Black Magician Trilogy", bookNumber: 2 },
+  { title: "The High Lord", author: "Trudi Canavan", series: "Black Magician Trilogy", bookNumber: 3 },
+
+  // =========================
+  // Robert Jordan – Wheel of Time
+  // =========================
+  { title: "The Dragon Reborn", author: "Robert Jordan", series: "The Wheel of Time", bookNumber: 3 },
+  { title: "The Fires of Heaven", author: "Robert Jordan", series: "The Wheel of Time", bookNumber: 5 },
+  { title: "The Path of Daggers", author: "Robert Jordan", series: "The Wheel of Time", bookNumber: 8 },
+  { title: "The Gathering Storm", author: "Robert Jordan & Brandon Sanderson", series: "The Wheel of Time", bookNumber: 12 },
+
+  // =========================
+  // Brent Weeks
+  // =========================
+  { title: "The Blinding Knife", author: "Brent Weeks", series: "Lightbringer", bookNumber: 2 },
+
+  // =========================
+  // Christopher Paolini
+  // =========================
+  { title: "Murtagh", author: "Christopher Paolini", series: "Inheritance Cycle", bookNumber: 5 },
+
+  // =========================
+  // Glenda Larke
+  // =========================
+  { title: "The Lascar's Dagger", author: "Glenda Larke", series: "The Forsaken Lands", bookNumber: 1 },
+
+  // =========================
+  // David Farland
+  // =========================
+  { title: "The Sum of All Men", author: "David Farland", series: "The Runelords", bookNumber: 1 }
 ];
+
 
 const root = document.getElementById("bookshelf");
 
