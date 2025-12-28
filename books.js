@@ -251,6 +251,7 @@ async function renderLibrary() {
 
     const booksContainer = document.createElement("div");
     booksContainer.className = "author-books";
+    booksContainer.style.display = "none"; // collapsed by default
 
     authorHeader.addEventListener("click", () => {
       const isOpen = booksContainer.style.display === "block";
