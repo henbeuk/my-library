@@ -171,23 +171,28 @@
     display: none;
   }
 
-  /* ===== Ratings ===== */
-  .rating {
-    margin-top: 4px;
-    font-size: 0.9em;
-    color: #f5a623;
-  }
+/* ===== Ratings ===== */
+.rating,
+.no-rating {
+  margin-top: 4px;
+  min-height: 18px;      /* ← key line */
+  font-size: 0.9em;
+}
 
-  .rating .count {
-    color: #777;
-    font-size: 0.8em;
-    margin-left: 4px;
-  }
+.rating {
+  color: #f5a623;
+}
 
-  .no-rating {
-    color: #aaa;
-    font-size: 0.85em;
-  }
+.rating .count {
+  color: #777;
+  font-size: 0.8em;
+  margin-left: 4px;
+}
+
+.no-rating {
+  color: #aaa;
+}
+
 
   /* ===== UX ===== */
   .author-books,
