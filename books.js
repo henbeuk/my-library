@@ -116,6 +116,7 @@ statusFilter.addEventListener("change", renderLibrary);
 // Render library
 async function renderLibrary() {
   root.innerHTML = "";
+  updateStats(); 
 
   const searchTerm = searchInput.value.toLowerCase();
   const statusValue = statusFilter.value;
