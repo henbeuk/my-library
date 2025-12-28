@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Library Admin</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 6px;
+    }
+
+    th {
+      background: #f0f0f0;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-right: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 300px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Library Admin</h1>
+
+<table id="bookTable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Series</th>
+      <th>Book #</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<button onclick="addRow()">➕ Add Row</button>
+<button onclick="exportBooks()">💾 Export books.js</button>
+
+<h3>Generated books.js</h3>
+<textarea id="output"></textarea>
+
+<script>
+  function addRow(book = {}) {
+    const row = document.createElement("tr");
+
+    ["title", "author", "series", "bookNumber"].forEach(field => {
+      const cell = document.createElement("td");
+      const input = document.createElement("input");
+      input.value = book[field] || "";
+      cell.appendChild(input);
+      row.appendChild(cell);
+    });
+
+    document.querySelector("#bookTable tbody").appendChild(row);
+  }
+
+  function exportBooks() {
+    const rows = document.querySelectorAll("#bookTable tbody tr");
+    const books = [];
+
+    rows.forEach(row => {
+      const inputs = row.querySelectorAll("input");
+      if (inputs[0].value.trim()) {
+        books.push({
+          title: inputs[0].value,
+          author: inputs[1].value,
+          series: inputs[2].value,
+          bookNumber: Number(inputs[3].value)
+        });
+      }
+    });
+
+    const output = `const books = ${JSON.stringify(books, null, 2)};`;
+    document.getElementById("output").value = output;
+  }
+
+  // Start with one empty row
+  addRow();
+</script>
+
+</body>
+</html>
