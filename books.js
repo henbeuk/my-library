@@ -5,6 +5,18 @@ const books = [
     series: "Memory, Sorrow and Thorn",
     bookNumber: 1
   },
+    {
+    title: "Stone of Farewell",
+    author: "Tad Williams",
+    series: "Memory, Sorrow and Thorn",
+    bookNumber: 2
+  },
+    {
+    title: "To Green Angel Tower Siege",
+    author: "Tad Williams",
+    series: "Memory, Sorrow and Thorn",
+    bookNumber: 3
+  },
   {
     title: "Wizard’s First Rule",
     author: "Terry Goodkind",
