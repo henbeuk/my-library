@@ -128,7 +128,8 @@ bookDiv.innerHTML = `
 
   <div class="title">${book.title} (${year})</div>
   <div class="meta">#${book.bookNumber}</div>
-  ${rating ? `<div class="meta">${rating}</div>` : ""}
+  ${ratingHtml}
+
 
 <div class="meta read-toggle ${isRead ? "read" : "unread"}"
      data-id="${bookId}">
