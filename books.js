@@ -200,8 +200,20 @@ seriesHeader.innerHTML = `
 
         const olData = await fetchOpenLibraryData(book);
 
-        let coverUrl = "./placeholder-cover.png";
-        let year = "Unknown";
+let coverUrl = "./placeholder-cover.png";
+let year = "Unknown";
+
+// COVER + YEAR should be handled independently
+if (olData) {
+  if (olData.cover_i) {
+    coverUrl = `https://covers.openlibrary.org/b/id/${olData.cover_i}-L.jpg`;
+  }
+
+  if (olData.first_publish_year) {
+    year = olData.first_publish_year;
+  }
+}
+
         
 let ratingHtml = `<div class="no-rating">No rating</div>`;
 
@@ -222,6 +234,7 @@ if (olData && olData.ratings_average) {
     </div>
   `;
 }
+
 
 
         const goodreadsUrl =
