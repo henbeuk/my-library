@@ -33,15 +33,44 @@ books.forEach(book => {
 });
 
 async function fetchOpenLibraryData(book) {
-  const url = `https://openlibrary.org/search.json?title=${encodeURIComponent(
-    book.title
-  )}&author=${encodeURIComponent(book.author)}`;
+  const searchUrl =
+    `https://openlibrary.org/search.json?title=${encodeURIComponent(
+      book.title
+    )}&author=${encodeURIComponent(book.author)}`;
 
-  const response = await fetch(url);
-  const data = await response.json();
+  const searchResponse = await fetch(searchUrl);
+  const searchData = await searchResponse.json();
 
-  return data.docs && data.docs.length ? data.docs[0] : null;
+  if (!searchData.docs || !searchData.docs.length) {
+    return null;
+  }
+
+  const doc = searchData.docs[0];
+
+  // If rating already exists in search result, use it
+  if (doc.ratings_average) {
+    return doc;
+  }
+
+  // Otherwise, try the Work API (authoritative source)
+  if (doc.key) {
+    const workUrl = `https://openlibrary.org${doc.key}.json`;
+    const workResponse = await fetch(workUrl);
+    const workData = await workResponse.json();
+
+    if (workData.ratings && workData.ratings.average) {
+      return {
+        ...doc,
+        ratings_average: workData.ratings.average,
+        ratings_count: workData.ratings.count
+      };
+    }
+  }
+
+  // Return doc even if no ratings exist (truthful "No rating")
+  return doc;
 }
+
 
 // Render
 Object.keys(library).forEach(async author => {
