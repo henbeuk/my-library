@@ -114,8 +114,9 @@ authors.forEach(async author => {
     const shelf = document.createElement("div");
     shelf.className = "bookshelf";
 
-    authorSection.appendChild(seriesHeader);
-    authorSection.appendChild(shelf);
+booksContainer.appendChild(seriesHeader);
+booksContainer.appendChild(shelf);
+
 
     for (const book of seriesMap[series]) {
       const bookDiv = document.createElement("div");
