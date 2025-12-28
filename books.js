@@ -98,6 +98,9 @@ Object.keys(library).forEach(async author => {
         )}`;
 
       const bookId = `${book.author}::${book.title}`;
+      const notesKey = `notes::${bookId}`;
+      const savedNotes = localStorage.getItem(notesKey) || "";
+
 const isRead = localStorage.getItem(bookId) === "read";
 
 bookDiv.innerHTML = `
@@ -107,19 +110,38 @@ bookDiv.innerHTML = `
   <div class="meta">#${book.bookNumber}</div>
   ${rating ? `<div class="meta">${rating}</div>` : ""}
 
-  <div class="meta read-toggle ${isRead ? "read" : "unread"}"
-       data-id="${bookId}">
-    ${isRead ? "✔ Read" : "○ Unread"}
-  </div>
+<div class="meta read-toggle ${isRead ? "read" : "unread"}"
+     data-id="${bookId}">
+  ${isRead ? "✔ Read" : "○ Unread"}
+</div>
 
-  <div class="meta" style="margin-top:6px;">
-    <a href="${goodreadsUrl}" target="_blank">
-      🔗 View on Goodreads
-    </a>
-  </div>
+<div class="meta notes-toggle">📝 Notes</div>
+
+<textarea class="notes-area"
+          placeholder="Your notes…">${savedNotes}</textarea>
+
+<div class="meta" style="margin-top:6px;">
+  <a href="${goodreadsUrl}" target="_blank">
+    🔗 View on Goodreads
+  </a>
+</div>
+
 `;
 
       const toggle = bookDiv.querySelector(".read-toggle");
+
+      const notesToggle = bookDiv.querySelector(".notes-toggle");
+const notesArea = bookDiv.querySelector(".notes-area");
+
+notesToggle.addEventListener("click", () => {
+  notesArea.style.display =
+    notesArea.style.display === "none" ? "block" : "none";
+});
+
+notesArea.addEventListener("input", () => {
+  localStorage.setItem(notesKey, notesArea.value);
+});
+
 
 toggle.addEventListener("click", () => {
   const current = localStorage.getItem(bookId);
