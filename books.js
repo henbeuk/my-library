@@ -83,6 +83,29 @@ async function fetchOpenLibraryData(book) {
   return doc; // truthful "No rating"
 }
 
+function updateStats() {
+  const totalBooks = books.length;
+
+  let readCount = 0;
+
+  books.forEach(book => {
+    const id = `${book.author}::${book.title}`;
+    if (localStorage.getItem(id) === "read") {
+      readCount++;
+    }
+  });
+
+  const percent =
+    totalBooks === 0 ? 0 : Math.round((readCount / totalBooks) * 100);
+
+  const stats = document.getElementById("stats");
+  if (!stats) return;
+
+  stats.textContent =
+    `📚 ${totalBooks} books · ✔ ${readCount} read (${percent}%)`;
+}
+
+
 // Search & filter controls
 const searchInput = document.getElementById("searchInput");
 const statusFilter = document.getElementById("statusFilter");
