@@ -202,37 +202,27 @@ seriesHeader.innerHTML = `
 
         let coverUrl = "./placeholder-cover.png";
         let year = "Unknown";
-        let ratingHtml = "";
+        
+let ratingHtml = `<div class="no-rating">No rating</div>`;
 
-        if (olData) {
-          if (olData.cover_i) {
-            coverUrl = `https://covers.openlibrary.org/b/id/${olData.cover_i}-L.jpg`;
-          }
+if (olData && olData.ratings_average) {
+  const avg = olData.ratings_average;
+  const count = olData.ratings_count || 0;
+  const fullStars = Math.round(avg);
 
-          if (olData.first_publish_year) {
-            year = olData.first_publish_year;
-          }
+  const stars =
+    "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
 
-          if (olData.ratings_average) {
-            const avg = olData.ratings_average;
-            const count = olData.ratings_count || 0;
-            const fullStars = Math.round(avg);
+  ratingHtml = `
+    <div class="rating">
+      ${stars}
+      <span class="count">
+        (${avg.toFixed(1)}${count ? ` · ${count}` : ""})
+      </span>
+    </div>
+  `;
+}
 
-            const stars =
-              "★".repeat(fullStars) + "☆".repeat(5 - fullStars);
-
-            ratingHtml = `
-              <div class="rating">
-                ${stars}
-                <span class="count">
-                  (${avg.toFixed(1)}${count ? ` · ${count}` : ""})
-                </span>
-              </div>
-            `;
-          } else {
-            ratingHtml = `<div class="no-rating">No rating</div>`;
-          }
-        }
 
         const goodreadsUrl =
           `https://www.goodreads.com/search?q=${encodeURIComponent(
