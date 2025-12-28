@@ -200,7 +200,7 @@ seriesHeader.innerHTML = `
 
         const olData = await fetchOpenLibraryData(book);
 
-        let coverUrl = "https://via.placeholder.com/200x300?text=No+Cover";
+        let coverUrl = "placeholder-cover.png";
         let year = "Unknown";
         let ratingHtml = "";
 
@@ -244,31 +244,32 @@ seriesHeader.innerHTML = `
         const savedNotes = localStorage.getItem(notesKey) || "";
         const hasNotes = savedNotes.trim().length > 0;
 
-        bookDiv.innerHTML = `
-          <img src="${coverUrl}" alt="Book cover">
+bookDiv.innerHTML = `
+  <img src="${coverUrl}" alt="Book cover">
 
-          <div class="title">${book.title} (${year})</div>
-          <div class="meta">#${book.bookNumber}</div>
-          ${ratingHtml}
+  <div class="title">${book.title} (${year})</div>
+  <div class="meta">#${book.bookNumber}</div>
+  ${ratingHtml}
 
-          <div class="meta read-toggle ${isRead ? "read" : "unread"}"
-               data-id="${bookId}">
-            ${isRead ? "✔ Read" : "○ Unread"}
-          </div>
+  <div class="meta read-toggle ${isRead ? "read" : "unread"}"
+       data-id="${bookId}">
+    ${isRead ? "✔ Read" : "○ Unread"}
+  </div>
 
-          <div class="meta notes-toggle ${hasNotes ? "has-notes" : ""}">
-            📝 Notes
-          </div>
+  <div class="meta notes-toggle ${hasNotes ? "has-notes" : ""}">
+    📝 Notes
+  </div>
 
-          <textarea class="notes-area"
-                    placeholder="Your notes…">${savedNotes}</textarea>
+  <textarea class="notes-area"
+            placeholder="Your notes…">${savedNotes}</textarea>
 
-          <div class="meta" style="margin-top:6px;">
-            <a href="${goodreadsUrl}" target="_blank">
-              🔗 View on Goodreads
-            </a>
-          </div>
-        `;
+  <div class="meta" style="margin-top:6px;">
+    <a href="${goodreadsUrl}" target="_blank">
+      🔗 View on Goodreads
+    </a>
+  </div>
+`;
+
 
         const toggle = bookDiv.querySelector(".read-toggle");
         const notesToggle = bookDiv.querySelector(".notes-toggle");
