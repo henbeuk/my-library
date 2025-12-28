@@ -200,7 +200,7 @@ seriesHeader.innerHTML = `
 
         const olData = await fetchOpenLibraryData(book);
 
-        let coverUrl = "placeholder-cover.png";
+        let coverUrl = "./placeholder-cover.png";
         let year = "Unknown";
         let ratingHtml = "";
 
@@ -273,8 +273,8 @@ bookDiv.innerHTML = `
 const img = bookDiv.querySelector("img");
 
 img.onerror = () => {
-  img.onerror = null; // ✅ prevents infinite loop
-  img.src = "placeholder-cover.png";
+  img.onerror = null; 
+  img.src = "./placeholder-cover.png";
 };
 
         const toggle = bookDiv.querySelector(".read-toggle");
