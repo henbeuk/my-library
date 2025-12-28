@@ -97,19 +97,28 @@ Object.keys(library).forEach(async author => {
           book.title + " " + book.author
         )}`;
 
-      bookDiv.innerHTML = `
-        <img src="${coverUrl}" alt="Book cover">
+      const bookId = `${book.author}::${book.title}`;
+const isRead = localStorage.getItem(bookId) === "read";
 
-        <div class="title">${book.title} (${year})</div>
-        <div class="meta">#${book.bookNumber}</div>
-        ${rating ? `<div class="meta">${rating}</div>` : ""}
+bookDiv.innerHTML = `
+  <img src="${coverUrl}" alt="Book cover">
 
-        <div class="meta" style="margin-top:6px;">
-          <a href="${goodreadsUrl}" target="_blank">
-            🔗 View on Goodreads
-          </a>
-        </div>
-      `;
+  <div class="title">${book.title} (${year})</div>
+  <div class="meta">#${book.bookNumber}</div>
+  ${rating ? `<div class="meta">${rating}</div>` : ""}
+
+  <div class="meta read-toggle ${isRead ? "read" : "unread"}"
+       data-id="${bookId}">
+    ${isRead ? "✔ Read" : "○ Unread"}
+  </div>
+
+  <div class="meta" style="margin-top:6px;">
+    <a href="${goodreadsUrl}" target="_blank">
+      🔗 View on Goodreads
+    </a>
+  </div>
+`;
+
     }
   }
 });
