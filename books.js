@@ -15,16 +15,23 @@ const books = [
 
 const root = document.getElementById("bookshelf");
 
-// Group books by author
-const booksByAuthor = {};
+// Group by author → series
+const library = {};
+
 books.forEach(book => {
-  if (!booksByAuthor[book.author]) {
-    booksByAuthor[book.author] = [];
+  if (!library[book.author]) {
+    library[book.author] = {};
   }
-  booksByAuthor[book.author].push(book);
+
+  const seriesName = book.series || "Standalone";
+
+  if (!library[book.author][seriesName]) {
+    library[book.author][seriesName] = [];
+  }
+
+  library[book.author][seriesName].push(book);
 });
 
-// Fetch Open Library data
 async function fetchOpenLibraryData(book) {
   const url = `https://openlibrary.org/search.json?title=${encodeURIComponent(
     book.title
@@ -33,74 +40,76 @@ async function fetchOpenLibraryData(book) {
   const response = await fetch(url);
   const data = await response.json();
 
-  if (!data.docs || data.docs.length === 0) {
-    return null;
-  }
-
-  return data.docs[0];
+  return data.docs && data.docs.length ? data.docs[0] : null;
 }
 
 // Render
-Object.keys(booksByAuthor).forEach(async author => {
-  const section = document.createElement("div");
-  section.className = "author-section";
+Object.keys(library).forEach(async author => {
+  const authorSection = document.createElement("div");
+  authorSection.className = "author-section";
 
-  const header = document.createElement("div");
-  header.className = "author-name";
-  header.textContent = author;
+  const authorHeader = document.createElement("div");
+  authorHeader.className = "author-name";
+  authorHeader.textContent = author;
 
-  const shelf = document.createElement("div");
-  shelf.className = "bookshelf";
+  authorSection.appendChild(authorHeader);
+  root.appendChild(authorSection);
 
-  section.appendChild(header);
-  section.appendChild(shelf);
-  root.appendChild(section);
+  const seriesMap = library[author];
 
-  for (const book of booksByAuthor[author]) {
-    const bookDiv = document.createElement("div");
-    bookDiv.className = "book";
-    bookDiv.innerHTML = `<div class="meta">Loading…</div>`;
-    shelf.appendChild(bookDiv);
+  for (const series of Object.keys(seriesMap)) {
+    const seriesHeader = document.createElement("div");
+    seriesHeader.className = "series-name";
+    seriesHeader.textContent = series;
 
-    const olData = await fetchOpenLibraryData(book);
+    const shelf = document.createElement("div");
+    shelf.className = "bookshelf";
 
-    let coverUrl = "https://via.placeholder.com/200x300?text=No+Cover";
-    let year = "Unknown";
-    let rating = "";
-    let ratingCount = "";
+    authorSection.appendChild(seriesHeader);
+    authorSection.appendChild(shelf);
 
-    if (olData) {
-      if (olData.cover_i) {
-        coverUrl = `https://covers.openlibrary.org/b/id/${olData.cover_i}-L.jpg`;
-      }
-      if (olData.first_publish_year) {
-        year = olData.first_publish_year;
-      }
-      if (olData.ratings_average) {
-        rating = `⭐ ${olData.ratings_average.toFixed(1)}`;
-        if (olData.ratings_count) {
-          rating += ` (${olData.ratings_count})`;
+    for (const book of seriesMap[series]) {
+      const bookDiv = document.createElement("div");
+      bookDiv.className = "book";
+      bookDiv.innerHTML = `<div class="meta">Loading…</div>`;
+      shelf.appendChild(bookDiv);
+
+      const olData = await fetchOpenLibraryData(book);
+
+      let coverUrl = "https://via.placeholder.com/200x300?text=No+Cover";
+      let year = "Unknown";
+      let rating = "";
+
+      if (olData) {
+        if (olData.cover_i) {
+          coverUrl = `https://covers.openlibrary.org/b/id/${olData.cover_i}-L.jpg`;
+        }
+        if (olData.first_publish_year) {
+          year = olData.first_publish_year;
+        }
+        if (olData.ratings_average) {
+          rating = `⭐ ${olData.ratings_average.toFixed(1)}`;
         }
       }
+
+      const goodreadsUrl =
+        `https://www.goodreads.com/search?q=${encodeURIComponent(
+          book.title + " " + book.author
+        )}`;
+
+      bookDiv.innerHTML = `
+        <img src="${coverUrl}" alt="Book cover">
+
+        <div class="title">${book.title} (${year})</div>
+        <div class="meta">#${book.bookNumber}</div>
+        ${rating ? `<div class="meta">${rating}</div>` : ""}
+
+        <div class="meta" style="margin-top:6px;">
+          <a href="${goodreadsUrl}" target="_blank">
+            🔗 View on Goodreads
+          </a>
+        </div>
+      `;
     }
-
-    const goodreadsUrl =
-      `https://www.goodreads.com/search?q=${encodeURIComponent(
-        book.title + " " + book.author
-      )}`;
-
-    bookDiv.innerHTML = `
-      <img src="${coverUrl}" alt="Book cover">
-
-      <div class="title">${book.title} (${year})</div>
-      <div class="meta">${book.series} #${book.bookNumber}</div>
-      ${rating ? `<div class="meta">${rating}</div>` : ""}
-
-      <div class="meta" style="margin-top:6px;">
-        <a href="${goodreadsUrl}" target="_blank">
-          🔗 View on Goodreads
-        </a>
-      </div>
-    `;
   }
 });
