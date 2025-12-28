@@ -100,6 +100,7 @@ Object.keys(library).forEach(async author => {
       const bookId = `${book.author}::${book.title}`;
       const notesKey = `notes::${bookId}`;
       const savedNotes = localStorage.getItem(notesKey) || "";
+      const hasNotes = savedNotes.trim().length > 0;
 
 const isRead = localStorage.getItem(bookId) === "read";
 
@@ -115,7 +116,10 @@ bookDiv.innerHTML = `
   ${isRead ? "✔ Read" : "○ Unread"}
 </div>
 
-<div class="meta notes-toggle">📝 Notes</div>
+<div class="meta notes-toggle ${hasNotes ? "has-notes" : ""}">
+  📝 Notes
+</div>
+
 
 <textarea class="notes-area"
           placeholder="Your notes…">${savedNotes}</textarea>
