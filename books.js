@@ -130,12 +130,23 @@ async function renderLibrary() {
     const seriesMap = library[author];
 
     for (const series of Object.keys(seriesMap)) {
-      const seriesHeader = document.createElement("div");
-      seriesHeader.className = "series-name";
-      seriesHeader.textContent = series;
-
+const seriesHeader = document.createElement("div");
+seriesHeader.className = "series-name series-header";
+seriesHeader.innerHTML = `
+  <span>${series}</span>
+  <span class="series-toggle">▾</span>
+`;
       const shelf = document.createElement("div");
       shelf.className = "bookshelf";
+      shelf.style.display = "grid"; // expanded by default
+
+      seriesHeader.addEventListener("click", () => {
+  const isOpen = shelf.style.display !== "none";
+  shelf.style.display = isOpen ? "none" : "grid";
+  seriesHeader.querySelector(".series-toggle").textContent =
+    isOpen ? "▸" : "▾";
+});
+
 
       booksContainer.appendChild(seriesHeader);
       booksContainer.appendChild(shelf);
